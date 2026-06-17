@@ -1,0 +1,30 @@
+###
+retrieve all activities
+
+GET http://localhost:8000/api/activity/
+
+###
+retrieve all the activities for a given level 
+
+GET http://localhost:8000/api/activity/1
+
+###
+retrieve activities filtered by  
+
+GET http://localhost:8000/api/activity/1?filter=foo&lang=en
+
+
+
+PUT http://localhost:8000/api/activity/
+Content-Type: application/json
+
+{
+  "student_id": "1",
+  "activity_id": "es"
+}
+
+###
+GET http://localhost:8000/api/activity/id/param1/param2
+
+###
+GET http://localhost:8000/api/activity/id
