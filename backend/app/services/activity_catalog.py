@@ -1,52 +1,65 @@
-def getActivitiesCatalog():
-    ## create a list of activities that includes:
-    ## - id
-    ## - name
-    ## - description
-    ## - level: takse the value between 1 and 10
-    ## - picture: URL to the picture of the activity
-    activities = [
+from ..config import settings
+from agents import Agent, Runner, FileSearchTool, SQLiteSession
+
+from pydantic import BaseModel
+from typing import List
+import json
+
+
+class Activity(BaseModel):
+    name: str
+    description: str
+    weekday: str
+    time: str
+
+class ActivitiesResponse(BaseModel):
+    level: int
+    activities: List[Activity]
+
+
+# read the catalog as a Knowledge Tool
+filesearchtool = FileSearchTool(
+    vector_store_ids=["vs_6a34c367ccd88191b2b7f60ed756991d"]
+)
+
+# Create the agent
+
+agent = Agent(
+    name="Extracurricular Activities Explorer",
+    instructions=(
+        "You are an AI agent that reads a vector store and filters activities by the provided level. "
+        "Each activity is offered for a range of levels (grades in a K-12 school) named 1,2,3,...,11,12. "
+        "If level = 0, return all the activities. "
+        "You MUST return ONLY valid JSON matching this schema:\n\n"
+        "{\n"
+        '  "level": <int>,\n'
+        '  "activities": [\n'
+        "    {\n"
+        '      "name": "<string>",\n'
+        '      "description": "<string>",\n'
+        '      "weekday": "<string>",\n'
+        '      "time": "<string>"\n'
+        "    }\n"
+        "  ]\n"
+        "}\n\n"
+        "Use in the description exactly the same words used in the source. Use only the information available in he tool"
+        "Do not return explanations. Do not return text outside JSON."
+    ),
+    tools=[filesearchtool]
+)
+
+
+async def getActivitiesCatalog(level: int):
+    result = await Runner.run(agent, input=[
         {
-            "id": 1,
-            "name": "Activity 1",
-            "description": "Description of Activity 1",
-            "level": 1,
-            "picture": "https://via.placeholder.com/150"
-        },  
-        {
-            "id": 2,
-            "name": "Activity 2",
-            "description": "Description of Activity 2",
-            "level": 2,
-            "picture": "https://via.placeholder.com/150"
-        },
-        {
-            "id": 3,
-            "name": "Activity 3",
-            "description": "Description of Activity 3",
-            "level": 3,
-            "picture": "https://via.placeholder.com/150"
-        },
-        {
-            "id": 4,
-            "name": "Activity 4",
-            "description": "Description of Activity 4",
-            "level": 4,
-            "picture": "https://via.placeholder.com/150"
-        },
-        {
-            "id": 5,
-            "name": "Activity 5",
-            "description": "Description of Activity 5",
-            "level": 5,
-            "picture": "https://via.placeholder.com/150"
-        },
-        {
-            "id": 6,
-            "name": "Activity 6",
-            "description": "Description of Activity 6",
-            "level": 6,
-            "picture": "https://via.placeholder.com/150"
-        },
-    ]
-    return activities
+            "role": "user",
+            "content": f"Get activities for level {level}"
+        }
+    ])
+
+    # Extract raw JSON text output from the agent and Parse it into Pydantic model
+    raw = result.final_output
+    data = json.loads(raw)
+    response = ActivitiesResponse(**data)
+    
+    return response

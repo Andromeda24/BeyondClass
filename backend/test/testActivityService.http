@@ -1,7 +1,7 @@
 ###
 retrieve all activities
 
-GET http://localhost:8000/api/activity/
+GET http://localhost:8000/api/activity
 
 ###
 retrieve all the activities for a given level 
@@ -15,7 +15,7 @@ GET http://localhost:8000/api/activity/1?filter=foo&lang=en
 
 
 
-PUT http://localhost:8000/api/activity/
+PUT http://localhost:8000/api/enroll/
 Content-Type: application/json
 
 {
@@ -23,8 +23,3 @@ Content-Type: application/json
   "activity_id": "es"
 }
 
-###
-GET http://localhost:8000/api/activity/id/param1/param2
-
-###
-GET http://localhost:8000/api/activity/id

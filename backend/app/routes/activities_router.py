@@ -10,10 +10,10 @@ router = APIRouter()
 @router.get("")
 async def get_activityList(filter: Optional[str] = "", lang: Optional[str] = "en"):
     #return get__filtered_activities(0,filter,lang)
-    return getActivitiesCatalog()
+    return await getActivitiesCatalog(0)
 
 
 @router.get("/{level}")
 async def get__filtered_activities(level: int, filter: Optional[str] = "", lang: Optional[str] = "en"):
-    return getActivitiesCatalog()
+    return await getActivitiesCatalog(level)
 
