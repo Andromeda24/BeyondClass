@@ -9,9 +9,19 @@ retrieve all the activities for a given level
 GET http://localhost:8000/api/activity/1
 
 ###
-retrieve activities filtered by  
+retrieve activities filtered by name 
 
-GET http://localhost:8000/api/activity/1?filter=foo&lang=en
+GET http://localhost:8000/api/activity/3?filter=STEM&lang=en
+
+###
+retrieve activities filtered by  category
+
+GET http://localhost:8000/api/activity/3?filter=music&lang=en
+
+###
+retrieve activities filtered by  other
+
+GET http://localhost:8000/api/activity/3?filter=girls&lang=en
 
 
 
