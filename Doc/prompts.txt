@@ -1,0 +1,18 @@
+Prompt for data creation
+
+Write a catalog that contains the extracurricular activities offered by a K-12 school for a given period. 
+if must contain a paragraph for each activity containing: 
+
+- A  title with the activity name: example: junior female, basketball, piano, robotics 
+- a subtitle showing the category and the levels offered to
+- The category is the academic department that offers the activity. Example: sports, music, arts, or IT
+- A picture related to the activity
+- a description: a short text between 50 and 200 words, describing the activity
+- schedule:  show the number of lessons (from 5 to 10), the start date, and the timeslot. Possible timeslots are: Monday 2:30 p.m. to 3:30 p.m., Wednesday 2:30 p.m. to 3:30 p.m., Saturday 8:00 a.m. to 9:30 a.m., and Saturday 10:00 a.m. to 11:30 a.m.   
+- cost: show the cost of the activity (between $150 and $300)
+- optional: indicate if the activity has optional extra services or costs like uniform, supplies, and/ or transportation
+
+create a sample of 5 activities
+
+
+https://www.freeimages.com/

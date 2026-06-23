@@ -6,3 +6,4 @@ pymongo
 motor
 python-dotenv
 openai
+openai-agents
