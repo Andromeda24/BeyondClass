@@ -1,3 +1,5 @@
 backend/.env
 backend/.env
 *.pyc
+*.pyc
+/frontend/node_modules

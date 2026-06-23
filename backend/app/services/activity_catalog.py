@@ -21,7 +21,8 @@ class ActivitiesResponse(BaseModel):
 
 # read the catalog as a Knowledge Tool
 filesearchtool = FileSearchTool(
-    vector_store_ids=["vs_6a34c367ccd88191b2b7f60ed756991d"]
+    
+    vector_store_ids=[settings.CATALOG_VECTOR]
 )
 
 # Create the agent

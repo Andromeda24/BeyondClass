@@ -21,7 +21,11 @@ GET http://localhost:8000/api/activity/3?filter=music&lang=en
 ###
 retrieve activities filtered by  other
 
-GET http://localhost:8000/api/activity/3?filter=girls&lang=en
+GET http://localhost:8000/api/activity/3?filter=girls
+
+GET http://localhost:8000/api/activity/3?filter=Activities%20only%20for%20boys
+
+
 
 
 
