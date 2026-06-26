@@ -1,0 +1,16 @@
+{
+  "appSlogan": "All the activities in one place, with the power of AI",
+  "parents": "Parents",
+  "teachers": "Teachers",
+  "staff": "Staff",
+  "parentPage": "Parents' Page",
+  "teacherPage": "Teachers' Page",
+  "adminPage": "Administration Page",
+  "loginGoogle": "Sign in with Google",
+  "loginMicrosoft": "Sign in with Microsoft",
+  "logout": "Sign out",
+  "activities.explore":"Exprore activities",
+  "activities.filter":"Filter activities by:",
+  "activities.chooseStudent":"Choose a Student",
+  "activities.enroll":"Enroll"
+}

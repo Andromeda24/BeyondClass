@@ -1,0 +1,12 @@
+{
+  "appSlogan": "My Application",
+  "parents": "Parents",
+  "teachers": "Teachers",
+  "staff": "Staff",
+  "parentPage": "Parents' Page",
+  "teacherPage": "Teachers' Page",
+  "adminPage": "Administration Page",
+  "loginGoogle": "Sign in with Google",
+  "loginMicrosoft": "Sign in with Microsoft",
+  "logout": "Sign out"
+}

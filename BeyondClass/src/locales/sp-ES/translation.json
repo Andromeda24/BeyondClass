@@ -1,0 +1,13 @@
+{
+    "appSlogan": "Mi Aplicación",
+    "parents": "Padres",
+    "teachers": "Profesores",
+    "staff": "Administración",
+    "parentPage": "Página de Padres",
+    "teacherPage": "Página de Profesores",
+    "adminPage": "Página de Administración",
+    "loginGoogle": "Iniciar con Google",
+    "loginMicrosoft": "Iniciar con Microsoft",
+    "logout": "Cerrar sesión"
+  }
+  
