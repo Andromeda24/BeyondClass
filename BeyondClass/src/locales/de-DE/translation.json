@@ -1,13 +1,23 @@
 {
-    "appSlogan": "Meine Anwendung",
-    "parents": "Eltern",
-    "teachers": "Lehrer",
-    "staff": "Personal",
-    "parentPage": "Elternseite",
-    "teacherPage": "Lehrerseite",
-    "adminPage": "Verwaltungsseite",
-    "loginGoogle": "Mit Google anmelden",
-    "loginMicrosoft": "Mit Microsoft anmelden",
-    "logout": "Abmelden"
+  "appSlogan": "Alle Aktivitäten an einem Ort, mit der Kraft von KI",
+  "parents": "Eltern",
+  "teachers": "Lehrkräfte",
+  "staff": "Mitarbeiter",
+  "parentPage": "Elternseite",
+  "teacherPage": "Lehrkräfteseite",
+  "adminPage": "Verwaltungsseite",
+  "loginGoogle": "Mit Google anmelden",
+  "loginMicrosoft": "Mit Microsoft anmelden",
+  "logout": "Abmelden",
+  "activities": {
+    "header": "Aktivitäten entdecken",
+    "studentLabel": "Schüler",
+    "studentPlaceholder": "Wähle einen Schüler aus",
+    "filterLabel": "Aktivitäten filtern nach",
+    "filterPlaceholder": "Gib Stichwörter ein, um Aktivitäten zu filtern...",
+    "loading": "Wird geladen…",
+    "search": "Suchen",
+    "level": "Level",
+    "enroll": "Anmelden"
   }
-  
+}

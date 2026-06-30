@@ -1,157 +1,26 @@
-import "@radix-ui/themes/styles.css";
+import ActivityExplorer from "../components/ActivityExplorer";
+import Header from "../components/Header";
+import { useEffect, useState } from "react";
+import { subscribeToAuth } from "../auth/auth";
+import type { User } from "firebase/auth";
+import {fetchActivities} from "../services/MockActivityService"
+import {students} from "../services/MockUserService"
 
-import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Card,
-  Flex,
-  Heading,
-  Select,
-  Text,
-  TextField
-} from "@radix-ui/themes";
+export const ParentPage = () => {
 
+  const [user, setUser] = useState<User | null>(null);
 
-type Activity = {
-  id: string;
-  title: string;
-  description: string;
-  level: number;
-  imageUrl: string; // each activity has its own image
-};
+  useEffect(() => subscribeToAuth(setUser), []);
 
-type ActivitiesProps = {
-  students: string[];
-  fetchActivities: (student: string, filter: string) => Promise<Activity[]>;
-};
-
-export const Activities: React.FC<ActivitiesProps> = ({
-  students,
-  fetchActivities,
-}) => {
-  const [selectedStudent, setSelectedStudent] = useState("");
-  const [filter, setFilter] = useState("");
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const result = await fetchActivities(selectedStudent, filter);
-      setActivities(result);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
-    <Flex direction="column" gap="5" px="5" py="0" style={{ width: "100%" }}>
-
-      {/* HEADER */}
-      <Heading size="6" style={{ color: "var(--gray-12)" }} >
-        Explore Activities
-      </Heading>
-
-      {/* SEARCH FORM */}
-      <Card  size="1"
-        style={{
-          backgroundColor: "var(--gray-1)",
-          border: "1px solid var(--gray-6)",
-          width: "100%"
-        }}
-      >
-        <form onSubmit={handleSubmit}>
-          <Flex direction="column" gap="4">
-            {/* Student Select */}
-            <Flex direction="column" gap="1">
-              <Text size="2">Student</Text>
-              <Select.Root
-                value={selectedStudent}
-                onValueChange={setSelectedStudent}
-              >
-                <Select.Trigger placeholder="Select a student" />
-                <Select.Content>
-                  {students.map((s) => (
-                    <Select.Item key={s} value={s}>
-                      {s}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
-            </Flex>
-
-            {/* Filter Input */}
-            <Flex direction="column" gap="1">
-              <Text size="2">Filter</Text>
-              <Box>
-              <TextField.Root value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                  placeholder="Type keywords to filter activities..."
-                />
-              </Box>
-            </Flex>
-
-            <Button type="submit" disabled={loading}>
-              {loading ? "Loading…" : "Search"}
-            </Button>
-          </Flex>
-        </form>
-      </Card>
-
-      {/* RESULTS GRID */}
-      <Flex
-        wrap="wrap"
-        gap="4"
-        justify="center"
-      >
-        {activities.map((activity) => (
-          <Card
-            key={activity.id}
-            size="3"
-            style={{
-              width: "300px",        // FIXED CARD WIDTH
-              flexShrink: 0,         // prevents shrinking on small screens
-            }}
-          >
-            <Flex direction="column" gap="0">
-              {/* IMAGE */}
-              <Box
-                style={{
-                  width: "100%",
-                  aspectRatio: "4 / 3",
-                  overflow: "hidden",
-                  borderRadius: "8px",
-                }}
-              >
-                <img
-                  src={activity.imageUrl}
-                  alt={activity.title}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              </Box>
-
-              <Heading size="3">{activity.title}</Heading>
-
-              <Text size="2" color="gray">
-                {activity.description}
-              </Text>
-
-              <Text size="2" weight="bold">
-                Level {activity.level}
-              </Text>
-
-              <Button color="green">Enroll</Button>
-            </Flex>
-          </Card>
-        ))}
-      </Flex>
-    </Flex>
+    <div>
+      <Header user={user} />
+      <ActivityExplorer
+        students={students}
+        fetchActivities={fetchActivities}
+    />
+    </div>
+    
   );
 };

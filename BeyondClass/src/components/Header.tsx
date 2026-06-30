@@ -20,7 +20,7 @@ export default function Header({ user }: HeaderProps) {
       <Flex
         align="center"
         justify="between"
-        p="3"
+        p="0"
         style={{ width: "100%" }}
       >
         {/* Left side: Language Selector */}

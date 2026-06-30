@@ -1,13 +1,23 @@
 {
-    "appSlogan": "Mi Aplicación",
-    "parents": "Padres",
-    "teachers": "Profesores",
-    "staff": "Administración",
-    "parentPage": "Página de Padres",
-    "teacherPage": "Página de Profesores",
-    "adminPage": "Página de Administración",
-    "loginGoogle": "Iniciar con Google",
-    "loginMicrosoft": "Iniciar con Microsoft",
-    "logout": "Cerrar sesión"
+  "appSlogan": "Todas las actividades en un solo lugar, con el poder de la IA",
+  "parents": "Padres",
+  "teachers": "Profesores",
+  "staff": "Personal",
+  "parentPage": "Página de Padres",
+  "teacherPage": "Página de Profesores",
+  "adminPage": "Página de Administración",
+  "loginGoogle": "Iniciar sesión con Google",
+  "loginMicrosoft": "Iniciar sesión con Microsoft",
+  "logout": "Cerrar sesión",
+  "activities": {
+    "header": "Explorar Actividades",
+    "studentLabel": "Estudiante",
+    "studentPlaceholder": "Selecciona un estudiante",
+    "filterLabel": "Filtrar actividades por",
+    "filterPlaceholder": "Escribe palabras clave para filtrar actividades...",
+    "loading": "Cargando…",
+    "search": "Buscar",
+    "level": "Nivel",
+    "enroll": "Inscribirse"
   }
-  
+}

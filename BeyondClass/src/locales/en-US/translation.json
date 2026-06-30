@@ -1,5 +1,5 @@
 {
-  "appSlogan": "All the activities in one place, with the power of AI",
+  "appSlogan": "All the activities in one place, powered by AI",
   "parents": "Parents",
   "teachers": "Teachers",
   "staff": "Staff",
@@ -9,8 +9,15 @@
   "loginGoogle": "Sign in with Google",
   "loginMicrosoft": "Sign in with Microsoft",
   "logout": "Sign out",
-  "activities.explore":"Exprore activities",
-  "activities.filter":"Filter activities by:",
-  "activities.chooseStudent":"Choose a Student",
-  "activities.enroll":"Enroll"
+  "activities": {
+    "header": "Explore Activities",
+    "studentLabel": "Student",
+    "studentPlaceholder": "Select a student",
+    "filterLabel": "Filter activities by",
+    "filterPlaceholder": "Type keywords to filter activities...",
+    "loading": "Loading…",
+    "search": "Search",
+    "level": "Level",
+    "enroll": "Enroll"
+  }
 }

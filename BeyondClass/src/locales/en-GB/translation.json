@@ -1,12 +1,23 @@
 {
-  "appSlogan": "My Application",
+  "appSlogan": "All the activities in one place, with the power of AI",
   "parents": "Parents",
   "teachers": "Teachers",
   "staff": "Staff",
-  "parentPage": "Parents' Page",
-  "teacherPage": "Teachers' Page",
+  "parentPage": "Parents’ Page",
+  "teacherPage": "Teachers’ Page",
   "adminPage": "Administration Page",
   "loginGoogle": "Sign in with Google",
   "loginMicrosoft": "Sign in with Microsoft",
-  "logout": "Sign out"
+  "logout": "Sign out",
+  "activities": {
+    "header": "Explore Activities",
+    "studentLabel": "Student",
+    "studentPlaceholder": "Select a student",
+    "filterLabel": "Filter activities by",
+    "filterPlaceholder": "Type keywords to filter activities...",
+    "loading": "Loading…",
+    "search": "Search",
+    "level": "Level",
+    "enroll": "Enrol"
+  }
 }
