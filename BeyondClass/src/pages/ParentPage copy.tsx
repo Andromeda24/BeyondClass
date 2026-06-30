@@ -1,17 +1,14 @@
-import "@radix-ui/themes/styles.css";
-
 import React, { useState } from "react";
 import {
   Box,
   Button,
   Card,
   Flex,
+  Grid,
   Heading,
   Select,
   Text,
-  TextField
 } from "@radix-ui/themes";
-
 
 type Activity = {
   id: string;
@@ -48,25 +45,18 @@ export const Activities: React.FC<ActivitiesProps> = ({
   };
 
   return (
-    <Flex direction="column" gap="5" px="5" py="0" style={{ width: "100%" }}>
-
+    <Flex direction="column" gap="6" p="4">
       {/* HEADER */}
-      <Heading size="6" style={{ color: "var(--gray-12)" }} >
+      <Heading size="4" mb="3">
         Explore Activities
       </Heading>
 
       {/* SEARCH FORM */}
-      <Card  size="1"
-        style={{
-          backgroundColor: "var(--gray-1)",
-          border: "1px solid var(--gray-6)",
-          width: "100%"
-        }}
-      >
+      <Card size="3">
         <form onSubmit={handleSubmit}>
           <Flex direction="column" gap="4">
             {/* Student Select */}
-            <Flex direction="column" gap="1">
+            <Flex direction="column" gap="2">
               <Text size="2">Student</Text>
               <Select.Root
                 value={selectedStudent}
@@ -84,12 +74,21 @@ export const Activities: React.FC<ActivitiesProps> = ({
             </Flex>
 
             {/* Filter Input */}
-            <Flex direction="column" gap="1">
+            <Flex direction="column" gap="2">
               <Text size="2">Filter</Text>
               <Box>
-              <TextField.Root value={filter}
+                <input
+                  type="text"
+                  value={filter}
                   onChange={(e) => setFilter(e.target.value)}
                   placeholder="Type keywords to filter activities..."
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "6px",
+                    border: "1px solid var(--gray-6)",
+                    fontSize: "14px",
+                  }}
                 />
               </Box>
             </Flex>
@@ -102,56 +101,57 @@ export const Activities: React.FC<ActivitiesProps> = ({
       </Card>
 
       {/* RESULTS GRID */}
-      <Flex
-        wrap="wrap"
-        gap="4"
-        justify="center"
-      >
-        {activities.map((activity) => (
-          <Card
-            key={activity.id}
-            size="3"
-            style={{
-              width: "300px",        // FIXED CARD WIDTH
-              flexShrink: 0,         // prevents shrinking on small screens
-            }}
-          >
-            <Flex direction="column" gap="0">
-              {/* IMAGE */}
-              <Box
-                style={{
-                  width: "100%",
-                  aspectRatio: "4 / 3",
-                  overflow: "hidden",
-                  borderRadius: "8px",
-                }}
-              >
-                <img
-                  src={activity.imageUrl}
-                  alt={activity.title}
+      <Card size="3">
+        <Heading size="4" mb="3">
+          Results
+        </Heading>
+
+        {activities.length === 0 && <Text>No activities yet</Text>}
+
+        <Grid columns="3" gap="4">
+          {activities.map((activity) => (
+            <Card key={activity.id} size="3">
+              <Flex direction="column" gap="3">
+                {/* IMAGE (4:3, scaled to fit card) */}
+                <Box
                   style={{
                     width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
+                    aspectRatio: "4 / 3",
+                    overflow: "hidden",
+                    borderRadius: "8px",
                   }}
-                />
-              </Box>
+                >
+                  <img
+                    src={activity.imageUrl}
+                    alt={activity.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Box>
 
-              <Heading size="3">{activity.title}</Heading>
+                {/* TITLE */}
+                <Heading size="3">{activity.title}</Heading>
 
-              <Text size="2" color="gray">
-                {activity.description}
-              </Text>
+                {/* DESCRIPTION */}
+                <Text size="2" color="gray">
+                  {activity.description}
+                </Text>
 
-              <Text size="2" weight="bold">
-                Level {activity.level}
-              </Text>
+                {/* LEVEL */}
+                <Text size="2" weight="bold">
+                  Level {activity.level}
+                </Text>
 
-              <Button color="green">Enroll</Button>
-            </Flex>
-          </Card>
-        ))}
-      </Flex>
+                {/* ENROLL BUTTON */}
+                <Button>Enroll</Button>
+              </Flex>
+            </Card>
+          ))}
+        </Grid>
+      </Card>
     </Flex>
   );
 };
