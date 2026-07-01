@@ -11,7 +11,7 @@ GET http://localhost:8000/api/activity/1
 ###
 retrieve activities filtered by name 
 
-GET http://localhost:8000/api/activity/3?filter=STEM&lang=en
+GET http://localhost:8000/api/activity/3?filter=STEM&lang=sp-ES
 
 ###
 retrieve activities filtered by  category

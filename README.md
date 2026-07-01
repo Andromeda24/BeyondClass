@@ -52,3 +52,8 @@ flowchart TB
     Nginx -->|Route "/api/*"| BE
     BE -->|Database Queries| DB
     BE -->|API Calls| OpenAI
+
+
+## Run the server 
+
+<RootFolder>/backend 

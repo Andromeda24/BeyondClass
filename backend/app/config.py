@@ -1,16 +1,20 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
+    DEFAULT_LANGUAGE: str = "en-US"
     MONGO_URI: str
     OPENAI_API_KEY: str
     CATALOG_VECTOR:str
 
-    model_config = SettingsConfigDict(
-        env_file=".env",
+
+
+    class Config:
+        env_file = ".env"
         extra="ignore"
-    )
+
 
 settings = Settings()
+
 
 ## Agents require the key in the environment
 import os

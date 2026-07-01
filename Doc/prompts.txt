@@ -16,3 +16,33 @@ create a sample of 5 activities
 
 
 https://www.freeimages.com/
+
+
+
+
+
+Lovable
+
+Write a web application in react with the following features:
+1. One main page containing: 
+- the application name and logo
+- an upper banner to choose the page language between en, sp, and de
+- a login option using gmail or Microsoft accounts
+- if the user is logged-in, show three buttons named "Parents", "Teachers", and "Staff" redirecting to the pages: 
+const router = createBrowserRouter([
+  { path: "/parent", element: <ParentPage /> },
+  { path: "/teacher", element: <TeacherPage /> },
+  { path: "/admin", element: <AdminPage /> }
+]);
+- if the user is logged-in, include in the upper banner a logout option
+
+2. an empty page /parent with the same look and feel and upper banner than the main, containing only a title, used as the router destination for the three paths
+
+=======================
+
+Create a crewAI agent that Orchestrate the enrollment of extracurricular activities in a k/12 school following these steps:
+-	Get a level (k to 12) and a student identification
+-	Display a list of activities available for this level, including name, description, picture, cost, and day of the week
+-	Enroll one activity: verify that the student has no conflicting activities (other activity the same day
+-	Repeat the process as needed
+-	Display the list of students enrolled in each activity

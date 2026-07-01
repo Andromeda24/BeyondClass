@@ -1,7 +1,10 @@
 from ..config import settings
 from agents import Agent, Runner, FileSearchTool, SQLiteSession
 
+from pydantic_settings import BaseSettings
 from pydantic import BaseModel
+
+
 from typing import List
 import json
 
@@ -12,7 +15,7 @@ class Activity(BaseModel):
     description: str
     weekday: str
     time: str
-    match:str
+    match:str = ""
 
 class ActivitiesResponse(BaseModel):
     level: int
