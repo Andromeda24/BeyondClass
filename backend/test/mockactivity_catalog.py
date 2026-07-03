@@ -1,4 +1,19 @@
 
+def getMockActivity():
+    return { "level": 5,
+        "activities": [
+            {
+            "id": 1,
+            "name": "Watercolor Painting Class",
+            "description": "A beginner‑friendly watercolor class where students learn essential brush techniques, color blending, layering, and how to create soft, expressive artwork using water-based pigments.",
+            "level": 1,
+            "picture": "https://via.placeholder.com/150"
+            },  
+        ]
+    }
+
+test  = getMockActivity()
+print (test)
 
 def getActivitiesCatalog():
     ## create a list of activities that includes:

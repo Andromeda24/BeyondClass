@@ -5,9 +5,7 @@ class Settings(BaseSettings):
     MONGO_URI: str
     OPENAI_API_KEY: str
     CATALOG_VECTOR:str
-
-
-
+    OPENAI_DEFAULT_MODEL:str
     class Config:
         env_file = ".env"
         extra="ignore"

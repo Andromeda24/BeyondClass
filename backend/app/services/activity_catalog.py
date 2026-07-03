@@ -1,25 +1,7 @@
 from ..config import settings
+from ..model.Activities import ActivitiesResponse, Activity
 from agents import Agent, Runner, FileSearchTool, SQLiteSession
-
-from pydantic_settings import BaseSettings
-from pydantic import BaseModel
-
-
-from typing import List
 import json
-
-
-class Activity(BaseModel):
-    id: int
-    name: str
-    description: str
-    weekday: str
-    time: str
-    match:str = ""
-
-class ActivitiesResponse(BaseModel):
-    level: int
-    activities: List[Activity]
 
 
 # read the catalog as a Knowledge Tool
