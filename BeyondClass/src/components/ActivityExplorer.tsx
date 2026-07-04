@@ -28,13 +28,15 @@ type Student = {
 
 export default function ActivityExplorer ( { students,   fetchActivities })
  {
+  const { i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [selectedStudent, setSelectedStudent] = useState(students[0]?.id ?? "");
-  const [selectedLevel, setSelectedLevel] = useState("");
   const [filter, setFilter] = useState("");
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(false);
-
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+  
   function getStudentLevel(
     students: Student[],
     selectedStudentId: string
@@ -54,15 +56,15 @@ export default function ActivityExplorer ( { students,   fetchActivities })
 
     try {
       const level = getStudentLevel(students,selectedStudent)
-
-      const result = await fetchActivities(level, filter,"de-DE");
+      setCurrentLanguage(i18n.language)
+      const result = await fetchActivities(level, filter,i18n.language);
       setActivities(result);
     } finally {
       setLoading(false);
     }
   };
 
-  const { t } = useTranslation();
+
   
   return (
     <Flex direction="column" gap="5" px="5" py="0" style={{ width: "100%" }}>
@@ -71,7 +73,11 @@ export default function ActivityExplorer ( { students,   fetchActivities })
       <Heading size="6" style={{ color: "var(--gray-12)" }}>
         {t("activities.header")}
       </Heading>
-
+      {currentLanguage !== i18n.language && (
+          <Text size="2">
+            {t("activities.wrongLanguage")}
+          </Text>
+      )}
       {/* SEARCH FORM */}
       <Card
         size="1"
@@ -83,8 +89,6 @@ export default function ActivityExplorer ( { students,   fetchActivities })
       >
         <form onSubmit={handleSubmit}>
           <Flex direction="column" gap="4">
-            <Text size="2">{selectedStudent}</Text>
-            <Text size="2">{filter}</Text>
             {/* Student Select */}
             <Flex direction="column" gap="1">
               <Text size="2">{t("activities.studentLabel")}</Text>
@@ -138,13 +142,15 @@ export default function ActivityExplorer ( { students,   fetchActivities })
           >
             <Flex direction="column" gap="1" p="0" align="center">
               <Heading size="3" style={{ margin: 5 }}>
-                {activity.name}
+                {activity.name} 
               </Heading>
-
+              <Text size="2">
+                {activity.weekday} {activity.time}
+              </Text>
               {/* IMAGE */}
               <Box
                 style={{
-                  width: "100%",
+                  width: "50%",
                   aspectRatio: "4 / 3",
                   overflow: "hidden",
                   borderRadius: "8px",
@@ -168,11 +174,9 @@ export default function ActivityExplorer ( { students,   fetchActivities })
               </Text>
 
               <Text size="2" weight="bold">
-                {t("activities.level")} {activity.levels}
+                {activity.levels}
               </Text>
-              <Text size="2" weight="bold">
-                {activity.weekday} {activity.time}
-              </Text>
+
 
               <Button color="green">{t("activities.enroll")}</Button>
             </Flex>

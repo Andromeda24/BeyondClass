@@ -1,5 +1,5 @@
 export interface Activity {
-    id: number;
+    id: string;
     name: string;
     description: string;
     weekday: string;

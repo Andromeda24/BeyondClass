@@ -9,7 +9,7 @@ export const fetchActivities = async (level: string, filter: string, lang:String
       weekday: "Monday",
       time: "10:00",
       levels: "1",
-      imageUrl: "/src/assets/activity.jpg",
+      imageUrl: "http://localhost:5173/public/pictures/piano.jpg",
       match: ""
     },
     {
@@ -19,7 +19,7 @@ export const fetchActivities = async (level: string, filter: string, lang:String
       weekday: "Tuesday",
       time: "11:00",
       levels: "2",
-      imageUrl: "/src/assets/activity.jpg",
+      imageUrl: "http://localhost:5173/public/pictures/soccer.png",
       match: ""
     },
     {

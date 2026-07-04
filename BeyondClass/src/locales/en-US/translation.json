@@ -18,6 +18,7 @@
     "loading": "Loading…",
     "search": "Search",
     "level": "Offered to levels",
-    "enroll": "Enroll"
+    "enroll": "Enroll",
+    "wrongLanguage":"The language has changed. Run the search again to update the translation."
   }
 }

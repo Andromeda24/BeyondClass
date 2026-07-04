@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import List
 
 class Activity(BaseModel):
-    id: int
+    id: str
     name: str
     description: str
     weekday: str
@@ -20,7 +20,7 @@ modeldescription = ("{\n"
         '  "level": <int>,\n'
         '  "activities": [\n'
         "    {\n"
-        '      "id": <int>,\n'
+        '      "id": "<string>",\n'
         '      "name": "<string>",\n'
         '      "description": "<string>",\n'
         '      "weekday": "<string>",\n'

@@ -26,13 +26,14 @@ import type {Activity} from "../models/activity";
       headers: {
         "Content-Type": "application/json"
       },
-      mode: "cors"
     });
   
     if (!response.ok) {
       throw new Error(`Failed to fetch activities: ${response.statusText}`);
     }
   
+    console.log (response)
+    console.log (response.json)
     const data: ActivitiesResponse = await response.json();
     return data.activities;
   };

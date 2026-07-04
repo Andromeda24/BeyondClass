@@ -26,6 +26,7 @@ ActivityAgent = Agent(
         " - the sentence is related with the description "
         "You MUST return ONLY valid JSON matching this schema:\n\n"
     ) + modeldescription + (
+        "After the sport name, you will find the text fill the field id with the text (id=nn). Use nn to fill the field id. If you cannot find the id, do not include the activity in the response."
         " if you don't have any of the fields required, fill it with 0 if the field type is int or the empty string if the field type is str"
         "Use in the description exactly the same words used in the source. Use only the information available in he tool"
         "match contains the rule or rules that matched the activity. Include each activity only once"
