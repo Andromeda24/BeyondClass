@@ -1,5 +1,5 @@
 from ..config import settings
-from ..model.Activities import ActivitiesResponse, Activity
+from ..model.Activities import ActivitiesResponse, modeldescription
 from agents import Agent, Runner, FileSearchTool, SQLiteSession
 import json
 
@@ -12,7 +12,7 @@ filesearchtool = FileSearchTool(
 
 # Create the agent
 
-agent = Agent(
+ActivityAgent = Agent(
     name="Extracurricular Activities Explorer",
     instructions=(
         "You are an AI agent that reads a vector store and filters activities by the provided level and text. "
@@ -25,19 +25,7 @@ agent = Agent(
         " - the sentence include a word similar to the category"
         " - the sentence is related with the description "
         "You MUST return ONLY valid JSON matching this schema:\n\n"
-        "{\n"
-        '  "level": <int>,\n'
-        '  "activities": [\n'
-        "    {\n"
-        '      "id": <int>,\n'
-        '      "name": "<string>",\n'
-        '      "description": "<string>",\n'
-        '      "weekday": "<string>",\n'
-        '      "time": "<string>",\n'
-        '      "match":"<string>",\n'
-        "    }\n"
-        "  ]\n"
-        "}\n\n"
+    ) + modeldescription + (
         " if you don't have any of the fields required, fill it with 0 if the field type is int or the empty string if the field type is str"
         "Use in the description exactly the same words used in the source. Use only the information available in he tool"
         "match contains the rule or rules that matched the activity. Include each activity only once"
@@ -54,7 +42,7 @@ async def getActivitiesCatalog(level: int, filter: str):
         prompt += f" and whose data matches the sentence: '{filter}'" 
     print (prompt)
 
-    result = await Runner.run(agent, input=[
+    result = await Runner.run(ActivityAgent, input=[
         {
             "role": "user",
             "content": prompt

@@ -3,7 +3,8 @@ import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { subscribeToAuth } from "../auth/auth";
 import type { User } from "firebase/auth";
-import {fetchActivities} from "../services/MockActivityService"
+//import {fetchActivities} from "../services/MockActivityService"
+import { fetchActivities } from "../services/ActivityService";
 import {students} from "../services/MockUserService"
 
 export const ParentPage = () => {

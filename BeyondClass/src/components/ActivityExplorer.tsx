@@ -1,4 +1,5 @@
 import "@radix-ui/themes/styles.css";
+import type {Activity} from "../models/activity";
 
 import React, { useState } from "react";
 import {
@@ -15,14 +16,6 @@ import {
 import { useTranslation } from "react-i18next";
 
 
-type Activity = {
-  id: string;
-  title: string;
-  description: string;
-  level: number;
-  imageUrl: string;
-};
-
 type Student = {
   id: string;
   displayName: string;
@@ -32,25 +25,37 @@ type Student = {
 };
 
 
-interface SearchProps { 
-    students: Student[],
-    fetchActivities: (studentId: string, filter: string) => Promise<Activity[]>
- }
-  
 
 export default function ActivityExplorer ( { students,   fetchActivities })
  {
-  const [selectedStudent, setSelectedStudent] = useState("");
+
+  const [selectedStudent, setSelectedStudent] = useState(students[0]?.id ?? "");
+  const [selectedLevel, setSelectedLevel] = useState("");
   const [filter, setFilter] = useState("");
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(false);
 
+  function getStudentLevel(
+    students: Student[],
+    selectedStudentId: string
+  ): number {
+    const student = students.find(s => s.id === selectedStudentId);
+  
+    if (!student) {
+      throw new Error(`Selected student '${selectedStudentId}' not found.`);
+    }
+  
+    return student.level;
+  }
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const result = await fetchActivities(selectedStudent, filter);
+      const level = getStudentLevel(students,selectedStudent)
+
+      const result = await fetchActivities(level, filter,"de-DE");
       setActivities(result);
     } finally {
       setLoading(false);
@@ -78,7 +83,8 @@ export default function ActivityExplorer ( { students,   fetchActivities })
       >
         <form onSubmit={handleSubmit}>
           <Flex direction="column" gap="4">
-
+            <Text size="2">{selectedStudent}</Text>
+            <Text size="2">{filter}</Text>
             {/* Student Select */}
             <Flex direction="column" gap="1">
               <Text size="2">{t("activities.studentLabel")}</Text>
@@ -86,8 +92,9 @@ export default function ActivityExplorer ( { students,   fetchActivities })
               <Select.Root
                 value={selectedStudent}
                 onValueChange={setSelectedStudent}
+                required
               >
-                <Select.Trigger placeholder={t("activities.studentPlaceholder")} />
+                <Select.Trigger/>
                 <Select.Content>
                   {students.map((s: Student) => (
                     <Select.Item key={s.id} value={s.id}>
@@ -119,17 +126,20 @@ export default function ActivityExplorer ( { students,   fetchActivities })
       </Card>
 
       {/* RESULTS GRID */}
-      <Flex wrap="wrap" gap="4" justify="center">
+      <Flex wrap="wrap" gap="5" px="0" py="0" justify="center" style={{ width: "100%" }}>
         {activities.map((activity) => (
           <Card
             key={activity.id}
-            size="3"
+            size="1"
             style={{
-              width: "300px",
+              width: "350px",
               flexShrink: 0,
             }}
           >
-            <Flex direction="column" gap="0">
+            <Flex direction="column" gap="1" p="0" align="center">
+              <Heading size="3" style={{ margin: 5 }}>
+                {activity.name}
+              </Heading>
 
               {/* IMAGE */}
               <Box
@@ -140,25 +150,28 @@ export default function ActivityExplorer ( { students,   fetchActivities })
                   borderRadius: "8px",
                 }}
               >
-                <img
-                  src={activity.imageUrl}
-                  alt={activity.title}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
+              <img
+                src={activity.imageUrl && activity.imageUrl.trim() !== "" 
+                      ? activity.imageUrl 
+                      : "../src/assets/defaultActivity.png"}
+                alt={activity.name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+
               </Box>
-
-              <Heading size="3">{activity.title}</Heading>
-
               <Text size="2" color="gray">
                 {activity.description}
               </Text>
 
               <Text size="2" weight="bold">
-                {t("activities.level")} {activity.level}
+                {t("activities.level")} {activity.levels}
+              </Text>
+              <Text size="2" weight="bold">
+                {activity.weekday} {activity.time}
               </Text>
 
               <Button color="green">{t("activities.enroll")}</Button>

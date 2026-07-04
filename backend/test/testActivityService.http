@@ -27,6 +27,11 @@ GET http://localhost:8000/api/activity/3?filter=Activities%20only%20for%20boys
 
 
 
+###
+OPTION for using CORS 
+OPTION http://localhost:8000/api/activity/3?filter=music&lang=en
+
+###
 
 
 PUT http://localhost:8000/api/enroll/

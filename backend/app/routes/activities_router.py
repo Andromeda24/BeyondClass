@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from typing import Optional
 
-##from ..services.translatedCatalog import getTranslatedActivitiesCatalog
-from ..services.activity_catalog import getActivitiesCatalog
+from ..services.translatedCatalog import gettranslatedActivitiesCatalog
+##from ..services.activity_catalog import getActivitiesCatalog
 from ..config import settings
 
 router = APIRouter()
@@ -13,7 +13,7 @@ async def get_activityList(lang: Optional[str] = settings.DEFAULT_LANGUAGE):
     print("GET recibido con lang:", lang)
 
     try:
-        ##return await gettranslatedActivitiesCatalog(0, "", lang)
+        return await gettranslatedActivitiesCatalog(0, "", lang)
         return await getActivitiesCatalog(0, "")
     except Exception as e:
         # Log the real error for debugging
@@ -35,7 +35,8 @@ async def get_filtered_activities(
     print("GET recibido con level:", level, "filter:", filter, "lang:", lang)
 
     try:
-        return await getActivitiesCatalog(level, filter)
+        return await gettranslatedActivitiesCatalog (level, filter,lang)
+        #return await getActivitiesCatalog(level, filter)
     except Exception as e:
         print("❌ Error in get_filtered_activities:", str(e))
 
@@ -43,3 +44,4 @@ async def get_filtered_activities(
             status_code=500,
             detail=f"Failed to retrieve translated activities catalog: {str(e)}"
         )
+
