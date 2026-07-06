@@ -11,7 +11,7 @@ GET http://localhost:8000/api/activity/1
 ###
 retrieve activities filtered by name 
 
-GET http://localhost:8000/api/activity/3?filter=STEM&lang=sp-ES
+GET http://localhost:8000/api/activity/3?filter=STEM&lang=de-DE
 
 ###
 retrieve activities filtered by  category
@@ -26,6 +26,11 @@ GET http://localhost:8000/api/activity/3?filter=girls
 GET http://localhost:8000/api/activity/3?filter=Activities%20only%20for%20boys
 
 
+###
+GET http://localhost:8000/api/activity/3?filter=sports&lang=en-US
+
+###
+GET http://localhost:8000/api/activity/5?filter=only%20for%20girls&lang=en-US
 
 ###
 OPTION for using CORS 

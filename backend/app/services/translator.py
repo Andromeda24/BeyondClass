@@ -1,5 +1,5 @@
 from ..config import settings
-from ..model.Activities import ActivitiesResponse, modeldescription
+from ..model.Activities import ActivitiesResponse, modeldescription, ActivitiesTranslation
 from agents import Agent, Runner
 from openai import pydantic_function_tool
 
@@ -12,8 +12,12 @@ import json
 
 translation_instructions= (
     "You are a professional language translator. "
-    "Translate the content of a JSON object from {defaultLanguage} into the requested language. "
-    "Both the source and target languages use ISO 639 language–region codes. Examples: "
+    " You receive a ActivityTranslation object containing: "
+     " - input: <ActivitiesResponse>"       
+     " - originalLocale: <string>"       
+     " - newLocale: <string>"
+    "Translate the content of a JSON object from 'originalLocale' into the requested 'newLocale'. "
+    "Both originalLocale and newLocale are ISO 639 language–region codes. Examples: "
     "en-US: English (United States) "
     "en-GB: English (United Kingdom) "
     "es-ES: Spanish (Spain) "
@@ -37,7 +41,7 @@ translatorAgent =  Agent(
 
 async def translateActivityList(input:  ActivitiesResponse, locale:str): 
     """
-    Translate the content of an ActivitiesResponse from the {defaultLanguage} to the requested locale. 
+    Translate the content of the ActivitiesResponse from the {defaultLanguage} to the requested locale. 
     """
     try:
         result = translatorAgent.responses.create(

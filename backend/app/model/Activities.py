@@ -16,6 +16,15 @@ class ActivitiesResponse(BaseModel):
     level: int
     activities: List[Activity]
 
+
+class ActivitiesTranslation(BaseModel):
+    input: ActivitiesResponse
+    originalLocale: str
+    newlocale: str
+
+
+    
+
 modeldescription = ("{\n"
         '  "level": <int>,\n'
         '  "activities": [\n'

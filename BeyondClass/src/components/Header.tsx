@@ -1,13 +1,15 @@
 import { Flex, Box, Button, Card } from "@radix-ui/themes";
 import LanguageSelector from "./LanguageSelector";
-import { logout } from "../auth/auth";
+
 import type { User } from "firebase/auth";
 
-interface HeaderProps {
+export interface HeaderProps {
   user: User | null;
+  logoutRedirect: () => void;
 }
 
-export default function Header({ user }: HeaderProps) {
+export default function Header({ user, logoutRedirect }: HeaderProps) {
+
   return (
     <Card
       size="1"
@@ -31,7 +33,7 @@ export default function Header({ user }: HeaderProps) {
         {/* Right side: Logout button */}
         <Box>
           {user && (
-            <Button color="gray" variant="soft" onClick={logout}>
+            <Button color="gray" variant="soft" onClick={logoutRedirect}>
               Logout
             </Button>
           )}

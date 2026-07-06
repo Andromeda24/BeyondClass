@@ -1,16 +1,18 @@
 from ..config import settings
-from ..model.Activities import ActivitiesResponse, Activity
+from ..model.Activities import ActivitiesResponse, ActivitiesTranslation
 from agents import Agent, Runner
 import json
 from app.services.translator import translatorAgent
 from app.services.activity_catalog import ActivityAgent
 
+defaultLanguage = settings.DEFAULT_LANGUAGE
 # Create the agent
+
 
 agent = Agent(
     name="Extracurricular Activities Explorer Orchestrator",
     instructions=(
-            """
+            f"""
         You are an AI agent that performs a two-step operation:
         (1) retrieve an activities catalog, and
         (2) optionally translate it.
@@ -23,22 +25,25 @@ agent = Agent(
         - lang: a target language code
 
         2. Construct the prompt for the activitiesCatalog tool:
-        - Start with: "Get activities for level {level}"
+        - Start with: "Get activities for level 'level'"
         - If filter is not empty:
-            Append: " and whose data matches the sentence: '{filter}'"
+            Append: " and whose data matches the sentence: 'filter'"
         - Do not modify level or filter.
 
         3. Call the activitiesCatalog tool using the constructed prompt.
         - The tool will return an ActivitiesResponse object.
 
-        4. Compare the parameter {lang} with your default language.
+        4. Compare the parameter 'lang' with your default language.
         - If lang equals your default language:
             Return the ActivitiesResponse object exactly as received.
         - Otherwise:
-            Call the translatorAgent tool with:
-                - input: the ActivitiesResponse object
-                - locale: lang
-            Return the translated ActivitiesResponse object.
+            Construct a ActivityTranslation object with 
+            - input: the ActivitiesResponse object
+            - originalLocale: {defaultLanguage}
+            - newLocale: 'lang'
+            Call the translatorAgent tool with the ActivityTTranslation:
+                Return the translated ActivitiesResponse object.
+                If the translator returns nothing, raise an error
         """ 
     ),
     tools=[ 
@@ -48,7 +53,7 @@ agent = Agent(
         ),
         translatorAgent.as_tool(
             tool_name= "translatorAgent",
-            tool_description = "Translate the content of an ActivitiesResponse from the {defaultLanguage} to the requested locale. "
+            tool_description = f"Translate the content of an ActivitiesResponse from the {defaultLanguage} to the requested language included in the prompt as lang. "
         )
         ]
 )

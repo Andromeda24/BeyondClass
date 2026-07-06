@@ -26,6 +26,7 @@ type Student = {
 
 
 
+
 export default function ActivityExplorer ( { students,   fetchActivities })
  {
   const { i18n } = useTranslation();
@@ -37,6 +38,10 @@ export default function ActivityExplorer ( { students,   fetchActivities })
   const [loading, setLoading] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   
+  const handleStudentChange = (value: string) => {
+    setSelectedStudent(value);
+    setActivities([]); // clear activities when student changes
+  }; 
   function getStudentLevel(
     students: Student[],
     selectedStudentId: string
@@ -95,7 +100,7 @@ export default function ActivityExplorer ( { students,   fetchActivities })
 
               <Select.Root
                 value={selectedStudent}
-                onValueChange={setSelectedStudent}
+                onValueChange={handleStudentChange}
                 required
               >
                 <Select.Trigger/>
