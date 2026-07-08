@@ -6,21 +6,29 @@ import { subscribeToAuth } from "../auth/auth";
 import type { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { logout } from "../auth/auth";
 
 export default function HomePage() {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
+
+  const logoutRedirect = async () => {
+    await logout();     // Firebase signOut
+    navigate("/");      // Redirect to HomePage
+  };
+
   const { t } = useTranslation();
 
   useEffect(() => {
     return subscribeToAuth(setUser);
   }, []);
 
+  
   return (
     <Theme appearance="light" accentColor="green" grayColor="slate">
       <Flex direction="column" align="center" p="4" style={{ width: "100%" }}>
         {/* HEADER */}
-        <Header user={user} />
+        <Header user={user} logoutRedirect={logoutRedirect} />
 
         {/* MAIN CONTENT */}
         <Flex direction="column" align="center" gap="4" mt="6">

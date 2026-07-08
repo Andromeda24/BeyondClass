@@ -20,7 +20,7 @@ export default function ParentPage() {
   return (
     <div>
       <Header user={user} logoutRedirect={logoutRedirect} />
-      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Parent Page</h1>
+      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Teacher's Page</h1>
     </div>
   );
 }

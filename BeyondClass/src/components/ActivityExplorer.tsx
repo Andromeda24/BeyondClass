@@ -1,5 +1,7 @@
 import "@radix-ui/themes/styles.css";
-import type {Activity} from "../models/activity";
+import type {Activity, Student} from "../models/activity";
+import { EnrollPopup } from "./EnrollPopup";
+import { WeeklySchedule } from "./WeeklySchedule";
 
 import React, { useState } from "react";
 import {
@@ -16,16 +18,17 @@ import {
 import { useTranslation } from "react-i18next";
 
 
-type Student = {
-  id: string;
-  displayName: string;
-  fullName: string;
-  level: number;
-  parentId: string;
-};
 
 
+export async function enrollService(activityId: string): Promise<{ success: boolean }> {
+  console.log("Enroll service called with activityId:", activityId);
 
+  // Simulate a network delay
+  await new Promise((resolve) => setTimeout(resolve, 800));
+
+  // Fake response
+  return { success: true };
+}
 
 export default function ActivityExplorer ( { students,   fetchActivities })
  {
@@ -40,19 +43,20 @@ export default function ActivityExplorer ( { students,   fetchActivities })
   
   const handleStudentChange = (value: string) => {
     setSelectedStudent(value);
-    setActivities([]); // clear activities when student changes
+   // setActivities([]); // clear activities when student changes
   }; 
-  function getStudentLevel(
+
+  function getCurrentStudent(
     students: Student[],
     selectedStudentId: string
-  ): number {
+  ): Student {
     const student = students.find(s => s.id === selectedStudentId);
   
     if (!student) {
       throw new Error(`Selected student '${selectedStudentId}' not found.`);
     }
   
-    return student.level;
+    return student;
   }
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,7 +64,7 @@ export default function ActivityExplorer ( { students,   fetchActivities })
     setLoading(true);
 
     try {
-      const level = getStudentLevel(students,selectedStudent)
+      const level = getCurrentStudent(students,selectedStudent).level
       setCurrentLanguage(i18n.language)
       const result = await fetchActivities(level, filter,i18n.language);
       setActivities(result);
@@ -145,7 +149,9 @@ export default function ActivityExplorer ( { students,   fetchActivities })
               flexShrink: 0,
             }}
           >
-            <Flex direction="column" gap="1" p="0" align="center">
+
+
+            <Flex direction="column" gap="1" p="0" align="center" style={{ height: "100%" }}>
               <Heading size="3" style={{ margin: 5 }}>
                 {activity.name} 
               </Heading>
@@ -174,20 +180,31 @@ export default function ActivityExplorer ( { students,   fetchActivities })
               />
 
               </Box>
-              <Text size="2" color="gray">
-                {activity.description}
-              </Text>
+              <Box
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              width: "100%",
+            }}
+          >
+            <Flex direction="column" gap="1" p="0" align="center" style={{ height: "100%" }}>
+                  <Text size="2" color="gray">
+                    {activity.description}
+                  </Text>
+            </Flex>
+          </Box>
+          <Text size="1" weight="bold">
+                    {t("activities.cost")}: ${Number(activity.cost).toFixed(0)}, {t("activities.optionals")}:{" "}
+                    {activity.txtoptionalcosts}
+                  </Text>
+      
 
-              <Text size="2" weight="bold">
-                {activity.levels}
-              </Text>
-
-
-              <Button color="green">{t("activities.enroll")}</Button>
+                  <EnrollPopup activity={activity} student= {getCurrentStudent(students,selectedStudent)} onConfirm={enrollService} t={t} />
             </Flex>
           </Card>
         ))}
       </Flex>
+      <WeeklySchedule activities={activities} />
     </Flex>
   );
 };

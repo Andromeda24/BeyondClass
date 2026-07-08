@@ -9,6 +9,10 @@
   "loginGoogle": "Sign in with Google",
   "loginMicrosoft": "Sign in with Microsoft",
   "logout": "Sign out",
+  "common":{
+    "cancel":"Cancel",
+    "confirm":"Confirm"
+  },
   "activities": {
     "header": "Explore Activities",
     "studentLabel": "Student",
@@ -19,6 +23,11 @@
     "search": "Search",
     "level": "Offered to levels",
     "enroll": "Enroll",
-    "wrongLanguage":"The language has changed. Run the search again to update the translation."
+    "wrongLanguage":"The language has changed. Run the search again to update the translation.",
+    "cost":"Cost",
+    "optionals":"Optional",
+    "enrollConfirmTitle":"Enrolling {{studentName}} in {{activityName}}",
+    "acceptcost": "By accepting this enrollment, I agree to be charged ${{registrationCost}} for registration",
+    "acceptoptionals": "and ${{optionalCost}} for optional items"
   }
 }
