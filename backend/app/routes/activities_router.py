@@ -13,8 +13,7 @@ async def get_activityList(lang: Optional[str] = settings.DEFAULT_LANGUAGE):
     print("GET recibido con lang:", lang)
 
     try:
-        return await gettranslatedActivitiesCatalog(0, "", lang)
-        return await getActivitiesCatalog(0, "")
+        return await gettranslatedActivitiesCatalog(-2, "", lang)
     except Exception as e:
         # Log the real error for debugging
         print("❌ Error in get_activityList:", str(e))

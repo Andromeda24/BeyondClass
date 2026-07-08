@@ -1,15 +1,15 @@
 ###
-retrieve all activities
+#retrieve all activities
 
 GET http://localhost:8000/api/activity
 
 ###
-retrieve all the activities for a given level 
+### retrieve all the activities for a given level 
 
 GET http://localhost:8000/api/activity/1
 
 ###
-retrieve activities filtered by name 
+##retrieve activities filtered by name 
 
 GET http://localhost:8000/api/activity/3?filter=STEM&lang=de-DE
 

@@ -10,9 +10,16 @@ filesearchtool = FileSearchTool(
     vector_store_ids=[settings.CATALOG_VECTOR]
 )
 
-
-matchingInstructions = """
+matchingInstructions = f"""
 You are an AI agent that reads a vector store and filters activities by the provided level and text.
+The vector store represent a list of activities that includes for each activity at least: 
+
+name: string
+id: ussually writen as (id = nn) after the name. Assume it as string
+cost: a float value
+weekday: a value btween Monday to Sunday
+a start time in he format h:mm a.m./p.m.  
+
 
 You perform a two-step operation to construct the answer:
 (1) filter activities by level
@@ -44,31 +51,26 @@ Follow these rules exactly:
    - The filter topic is related to the content of the activity’s name, category, or description.
 
    Gender-specific filtering MUST NOT use the vector store. It MUST use explicit text rules:
-   - If the filter is “Only for girls”, include activities whose name or description explicitly or implicitly
-     refers to girls (e.g., “Girl Scouts”, “Girl’s soccer”, “your daughter will enjoy it”).
+   - If the filter is 'Only for girls', include activities whose name or description explicitly or implicitly
+     refers to girls (e.g., 'Girl Scouts', 'Girl’s soccer', 'your daughter will enjoy it').
      Exclude activities that state they are for both boys and girls.
    - If the filter is “Only for boys”, include activities whose name or description explicitly or implicitly
-     refers to boys (e.g., “Boy Scouts”, “Boys’ soccer”, “your son will enjoy it”).
+     refers to boys (e.g., 'Boy Scouts', 'Boys’ soccer', 'your son will enjoy it').
      Exclude activities that state they are for both boys and girls.
 
-6. You MUST return ONLY valid JSON matching this schema:
+6. if you don't have any of fields required in the response, fill them with 0 if the field type is int or the empty string if the field type is str.
+    Convert numbers to text to match the output format
+7. include the optional costs in two formats: as a text description similar to the one in the source, and a standarized list of concept and value.
+  for example:
+    'Sheet-music pack ($15)'   will be standarized as concept = 'Sheet-music pack' value=15
+ 
+8. Include in the description exactly the same words used in the source. Use only the information available in the source"
 
-   {
-     "level": <int>,
-     "activities": [
-       {
-         "id": "<str>",
-         "name": "<str>",
-         "description": "<str>",
-         "weekday": "<str>",
-         "time": "<str>",
-         "levels": "<str>",
-         "imageUrl": "<str>",
-         "match": "<str>"
-       }
-     ]
-   }
-"""
+8. You MUST return ONLY valid JSON matching this schema:
+  {modeldescription}
+
+do not include activities with empty name
+""" 
 
 # Create the agent
 

@@ -55,19 +55,28 @@ class ActivitySchedule(BaseModel):
 class Schedule (BaseModel):
     List[ActivitySchedule]
     
-modeldescription = ("{\n"
-        '  "level": <int>,\n'
-        '  "activities": [\n'
-        "    {\n"
-        '      "id": "<string>",\n'
-        '      "name": "<string>",\n'
-        '      "description": "<string>",\n'
-        '      "weekday": "<string>",\n'
-        '      "time": "<string>",\n'
-        '      "levels": "<string>",\n'
-        '      "imageUrl": "<string>",\n'
-        '      "match":"<string>",\n'
-        "    }\n"
-        "  ]\n"
-        "}\n\n"
-    )
+modeldescription = (
+    "{\n"
+    '  "level": <int>,\n'
+    '  "activities": [\n'
+    "    {\n"
+    '      "id": "<string>",\n'
+    '      "name": "<string>",\n'
+    '      "description": "<string>",\n'
+    '      "weekday": "<string>",\n'
+    '      "time": "<string>",\n'
+    '      "levels": "<string>",\n'
+    '      "cost": <float>,\n'
+    '      "txtoptionalcosts": "<string>",\n'
+    '      "optionals": [\n'
+    "        {\n"
+    '          "concept": "<string>",\n'
+    '          "value": <float>\n'
+    "        }\n"
+    "      ],\n"
+    '      "imageUrl": "<string>",\n'
+    '      "match": "<string>"\n'
+    "    }\n"
+    "  ]\n"
+    "}\n\n"
+)
