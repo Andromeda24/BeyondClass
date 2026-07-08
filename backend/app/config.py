@@ -6,6 +6,8 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str
     CATALOG_VECTOR:str
     OPENAI_DEFAULT_MODEL:str
+    MONGODB_URI:str
+    MONGODB_DB:str
     class Config:
         env_file = ".env"
         extra="ignore"

@@ -1,5 +1,5 @@
-from ..config import settings
-from ..model.Activities import ActivitiesResponse, modeldescription, ActivitiesTranslation
+from app.config import settings
+from app.model.activities import ActivitiesResponse, modeldescription, ActivitiesTranslation
 from agents import Agent, Runner
 from openai import pydantic_function_tool
 

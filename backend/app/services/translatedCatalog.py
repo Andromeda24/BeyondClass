@@ -1,5 +1,5 @@
 from ..config import settings
-from ..model.Activities import ActivitiesResponse, ActivitiesTranslation
+from ..model.activities import ActivitiesResponse, ActivitiesTranslation
 from agents import Agent, Runner
 import json
 from app.services.translator import translatorAgent

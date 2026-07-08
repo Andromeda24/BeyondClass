@@ -1,5 +1,5 @@
 from ..config import settings
-from ..model.Activities import ActivitiesResponse, modeldescription
+from ..model.activities import ActivitiesResponse, modeldescription
 from agents import Agent, Runner, FileSearchTool, SQLiteSession
 import json
 
@@ -69,7 +69,6 @@ Follow these rules exactly:
      ]
    }
 """
-
 
 # Create the agent
 

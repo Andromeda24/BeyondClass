@@ -1,0 +1,22 @@
+### basic call
+
+POST http://localhost:8000/api/enrollment/11/st123
+Content-Type: application/json
+
+{
+  "activityName": "Painting",
+  "student": {
+     "studentId": "stu123",
+      "displayName": "Jane",
+      "fullName": "Jane Doe",
+      "level":4,
+      "parent":"beyondclass50@gmail.com"
+  },
+  "weekday": "Tuesday",
+  "time": "15:00",
+  "cost": [
+    { "concept": "registration", "value": 40 }
+  ],
+  "status": "active"
+}
+

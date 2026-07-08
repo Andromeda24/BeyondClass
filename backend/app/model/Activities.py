@@ -1,6 +1,18 @@
-from pydantic_settings import BaseSettings
 from pydantic import BaseModel
 from typing import List
+
+
+class CostItem(BaseModel):
+    concept: str
+    value: float
+
+
+class BasicActivity(BaseModel):
+    id: str
+    name:str 
+    weekday: str
+    time:str
+
 
 class Activity(BaseModel):
     id: str
@@ -9,6 +21,9 @@ class Activity(BaseModel):
     weekday: str
     time: str
     levels:str
+    cost:float
+    txtoptionalcosts:str
+    optionals:List[CostItem]
     imageUrl:str
     match:str = ""
 
@@ -22,8 +37,16 @@ class ActivitiesTranslation(BaseModel):
     originalLocale: str
     newlocale: str
 
+class EnrollmentInput(BaseModel):
+    activityName: str
+    studentFullName: str
+    studentDisplayName: str
+    weekday: str
+    time: str
+    cost: List[CostItem]
+    status: str
 
-    
+
 
 modeldescription = ("{\n"
         '  "level": <int>,\n'
