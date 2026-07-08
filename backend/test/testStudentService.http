@@ -1,0 +1,6 @@
+
+### get Schedule
+
+GET http://localhost:8000/api/student/stu123
+
+

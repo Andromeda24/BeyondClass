@@ -9,10 +9,6 @@ from app.config import settings
 async def init_db(models):
     uri = settings.MONGODB_URI
     db_name = settings.MONGODB_DB
-
-    print(uri)
-    print(db_name)
-
     try:
         # Create Async PyMongo client
         client = AsyncMongoClient(uri)

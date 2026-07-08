@@ -14,14 +14,13 @@ class EnrollmentInput(BaseModel):
     weekday: str
     time: str
     cost: List[CostItem]
-    status: str
 
 class TestDoc (Document):
     name:str
 
 class Enrollment(Document):
     activity: BasicActivity
-    studentid: Student
+    student: Student
     costs:  List[CostItem]
     status: Literal["active", "inactive", "withdrawn"]
     created_at: datetime = datetime.now(timezone.utc)

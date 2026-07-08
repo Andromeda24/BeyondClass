@@ -6,12 +6,13 @@ from pymongo import AsyncMongoClient
 from beanie import Document, Indexed, init_beanie
 from app.model.activities import BasicActivity
 from app.model.students import Student
-from app.model.enrollment import Enrollment, EnrollmentInput
+from app.model.enrollment import Enrollment, EnrollmentInput, ActivityRoster
 from datetime import datetime, timezone
+from typing import List
 
 
 
-async def insert_enrollment(activityId: str, studentId: str, body: EnrollmentInput):
+async def insert_enrollment(activityId: str, body: EnrollmentInput):
     """
     Creates and inserts an Enrollment document based on EnrollmentInput.
     """
@@ -30,9 +31,9 @@ async def insert_enrollment(activityId: str, studentId: str, body: EnrollmentInp
         # Build Enrollment document
         enrollment = Enrollment(
             activity=activity,
-            studentid=student,
+            student=student,
             costs=body.cost,
-            status=body.status,
+            status="active",
             created_at=datetime.now(timezone.utc)
         )
 
@@ -89,3 +90,34 @@ insert_enrollment_tool = {
         }
     }
 }
+
+
+
+
+async def readRoster(activityId: str) -> ActivityRoster:
+    # 1. Query all enrollments for this activity
+    enrollments: List[Enrollment] = await Enrollment.find(
+        Enrollment.activity.id == activityId
+    ).to_list()
+
+    if not enrollments:
+        # No enrollments found → return empty roster
+        return ActivityRoster(
+            activityName="",
+            activityId=activityId,
+            studentList=[]
+        )
+
+    # 2. Extract activity info (all enrollments share the same activity)
+    activity: BasicActivity = enrollments[0].activity
+
+    # 3. Build the student list
+    students: List[Student] = [en.student for en in enrollments]
+
+    # 4. Build and return the roster
+    return ActivityRoster(
+        activityName=activity.name,
+        activityId=activity.id,
+        studentList=students
+    )
+

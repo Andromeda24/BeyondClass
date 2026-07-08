@@ -47,7 +47,14 @@ class EnrollmentInput(BaseModel):
     status: str
 
 
-
+class ActivitySchedule(BaseModel):
+    name: str
+    weekday:str
+    time:str
+    
+class Schedule (BaseModel):
+    List[ActivitySchedule]
+    
 modeldescription = ("{\n"
         '  "level": <int>,\n'
         '  "activities": [\n'

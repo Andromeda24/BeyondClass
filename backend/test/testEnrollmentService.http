@@ -1,10 +1,10 @@
 ### basic call
 
-POST http://localhost:8000/api/enrollment/11/st123
+POST http://localhost:8000/api/enrollment/11
 Content-Type: application/json
 
 {
-  "activityName": "Painting",
+  "activityName": "Chess club",
   "student": {
      "studentId": "stu123",
       "displayName": "Jane",
@@ -13,10 +13,61 @@ Content-Type: application/json
       "parent":"beyondclass50@gmail.com"
   },
   "weekday": "Tuesday",
-  "time": "15:00",
+  "time": "16:00",
   "cost": [
     { "concept": "registration", "value": 40 }
   ],
   "status": "active"
 }
+
+
+### populate data
+
+POST http://localhost:8000/api/enrollment/12
+Content-Type: application/json
+
+{
+  "activityName": "Soccer",
+  "student": {
+     "studentId": "stu123",
+      "displayName": "Jane",
+      "fullName": "Jane Doe",
+      "level":4,
+      "parent":"beyondclass50@gmail.com"
+  },
+  "weekday": "Monday",
+  "time": "16:00",
+  "cost": [
+    { "concept": "registration", "value": 50 }
+  ],
+  "status": "active"
+}
+
+
+###
+
+POST http://localhost:8000/api/enrollment/12
+Content-Type: application/json
+
+{
+  "activityName": "Soccer",
+  "student": {
+     "studentId": "stu124",
+      "displayName": "Louise",
+      "fullName": "Louise Lane",
+      "level":4,
+      "parent":"beyondclass50@gmail.com"
+  },
+  "weekday": "Monday",
+  "time": "16:00",
+  "cost": [
+    { "concept": "registration", "value": 50 }
+  ],
+  "status": "active"
+}
+
+
+### get Roster
+
+GET http://localhost:8000/api/enrollment/12
 

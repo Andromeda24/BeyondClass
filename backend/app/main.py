@@ -4,6 +4,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from .routes.activities_router import router as activities_router
 from app.routes.enrollment_router import router as enrollment_router
+from app.routes.students_router import router as students_router
 from app.init_db import init_db
 
 from fastapi import FastAPI
@@ -41,5 +42,6 @@ async def validation_exception_handler(request, exc):
 
 app.include_router(activities_router, prefix="/api/activity")
 app.include_router(enrollment_router, prefix="/api/enrollment")
+app.include_router(students_router, prefix="/api/student")
 
 
