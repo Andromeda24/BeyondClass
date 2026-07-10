@@ -11,7 +11,9 @@ The application is organized into four functional modules:
 
 Each module plays a distinct role in the overall experience, and agentic orchestration allows schools to adapt workflows using natural‑language instructions rather than code.
 
-## Beyond Class provides:
+## Functional View 
+
+Beyond Class provides:
 
 - AI‑powered activity exploration  
 - modular enrollment orchestration  
@@ -22,8 +24,11 @@ Each module plays a distinct role in the overall experience, and agentic orchest
 - analytics dashboards
 - semantic search and multilingual support  
 - natural‑language configuration
+
+  It is a flexible, agent‑driven platform that adapts to each school’s policies and simplifies the management of extracurricular activities.
+
 ---
-## Pipeline
+### Pipeline
 
 ```mermaid
 flowchart TD
@@ -91,16 +96,16 @@ Z --> O
 
 
 
-## 1. Activity Explorer Module
+### 1. Activity Explorer Module
 
 The Activity Explorer guides families from the school’s catalog to selecting an activity for their child.
 
-### Catalog Intake
+#### Catalog Intake
 Schools provide a **PDF activity catalog** that follows basic content‑quality guidelines (clear titles, descriptions, schedules, and categories).  
 Beyond Class does **not** rewrite or standardize this content.  
 AI agents extract the information as provided and load it into a vector database.
 
-### AI Preparation
+#### AI Preparation
 AI agents:
 
 - extract text  
@@ -109,7 +114,7 @@ AI agents:
 
 This creates a multilingual, searchable knowledge base.
 
-### Parent Access
+#### Parent Access
 Parents sign in using:
 
 - **Gmail**, or  
@@ -117,11 +122,11 @@ Parents sign in using:
 
 No new passwords are required.
 
-### Student Context
+#### Student Context
 Beyond Class retrieves the parent’s dependents from the **Student Information System (SIS)**.  
 The parent selects one student.
 
-### Activity Discovery
+#### Activity Discovery
 The system displays activities relevant to the selected student through:
 
 - grade‑level filtering  
@@ -132,11 +137,11 @@ Parents explore the catalog and choose an activity.
 
 ---
 
-## 2. Enrollment Module
+### 2. Enrollment Module
 
 Once a parent chooses an activity, Beyond Class triggers the Enrollment Module, which is orchestrated by an agent using modular, configurable steps.
 
-### School Rules and Validations
+#### School Rules and Validations
 The Enrollment Agent applies school rules such as:
 
 - scheduling conflict checks  
@@ -145,11 +150,11 @@ The Enrollment Agent applies school rules such as:
 
 These rules can prevent enrollment.
 
-### Conditional Enrollment
+#### Conditional Enrollment
 If school rules allow it, the agent creates the enrollment.  
 If rules prevent it, the enrollment is blocked.
 
-### Optional Steps
+#### Optional Steps
 The Enrollment Agent may also execute optional steps such as:
 
 - storing billing information  
@@ -160,7 +165,7 @@ These steps are **Lego‑like bricks** that can be added, removed, or reordered 
 
 ---
 
-## 3. Rostering Module
+### 3. Rostering Module
 
 When enrollment is created, Beyond Class updates the **Rostering Module**, which maintains:
 
@@ -168,12 +173,12 @@ When enrollment is created, Beyond Class updates the **Rostering Module**, which
 - activity assignments  
 - additional data needed for teachers and staff
 
-### Teacher Tools
+#### Teacher Tools
 Teachers access real‑time rosters to manage attendance and activity participation.
 
 ---
 
-## 4. Analytics Module
+### 4. Analytics Module
 
 School staff access consolidated information through:
 
@@ -185,29 +190,9 @@ These tools provide visibility into enrollment trends, participation, and operat
 
 ---
 
-
-
-It is a flexible, agent‑driven platform that adapts to each school’s policies and simplifies the management of extracurricular activities.
-
-
-flowchart TD
-
-    %% Client Layer
-    A[Browser\nParent URL / Role-based URL] --> B[Nginx Reverse Proxy]
-
-    %% Nginx Routing
-    B -->|"/"| C[Frontend\nReact + Vite + i18n]
-    B -->|"/api/*"| D[Backend\nFastAPI (Python)]
-
-    %% Backend Connections
-    D --> E[MongoDB\nUsers + Students]
-    D --> F[OpenAI API]
-
-    %% Notes
-    C -->|Fetch languages, users, students| D
-
-
-Deployment Diagram
+## Deployment Diagram (In progress)
+ 
+```mermaid
 
 flowchart TB
 
@@ -216,21 +201,21 @@ flowchart TB
         Browser[Web Browser]
     end
 
-    subgraph Server_Host[Server Host / VM / Container Host]
+    subgraph Server_Host[Server Host]
         subgraph Nginx_Container[Nginx Container]
             Nginx[Nginx Reverse Proxy]
         end
 
         subgraph Frontend_Container[Frontend Container]
-            FE[React Application\n(Vite Build)]
+            FE[React Application - Vite Build - Radix UI - i18n]
         end
 
         subgraph Backend_Container[Backend Container]
-            BE[FastAPI Backend\n(Python)]
+            BE[FastAPI Backend]
         end
 
         subgraph Mongo_Container[MongoDB Container]
-            DB[(MongoDB\nUsers + Students)]
+            DB[MongoDB]
         end
     end
 
@@ -240,12 +225,14 @@ flowchart TB
 
     %% Connections
     Browser -->|HTTP :80| Nginx
-    Nginx -->|Route "/"| FE
-    Nginx -->|Route "/api/*"| BE
+    Nginx -->|Route /| FE
+    Nginx -->|Route /api/*| BE
     BE -->|Database Queries| DB
     BE -->|API Calls| OpenAI
 
 
+
+``` 
 ## Run the server 
 
 <RootFolder>/backend 
