@@ -6,31 +6,68 @@ Beyond Class is an agentic AI application designed to help K–12 schools manage
 
 ```mermaid
 flowchart TD
-%% ============================
-%% Activity Explorer Process
-%% ============================
-
-A[School provides activity catalog] --> B[System prepares activity information]
-B --> C[Parents access the activity explorer]
-C --> D[Parents view activities relevant to their children]
-D --> E[Parents choose an activity]
 
 %% ============================
-%% Enrollment Orchestration
+%% Swimlanes (vertical layout)
 %% ============================
 
-E --> F{{Orchestrator evaluates optional steps}}
+subgraph School
+A[Provide activity catalog]
+end
 
-%% Validations can block enrollment
-F --> G[Optional: Apply school rules]
-G -->|Rules allow enrollment| H[Optional: Enrollment is created]
-G -->|Rules prevent enrollment| I[Enrollment is blocked]
+subgraph Beyond Class Activity Explorer
+B[Prepare activity information]
+C[Show activity explorer]
+D[Display relevant activities]
+end
 
-%% Other optional functional steps
-F --> J[Optional: Notify billing system]
-F --> K[Optional: Send confirmation to parents]
+subgraph Parent
+E[Choose an activity]
+end
+
+subgraph Beyond Class Enrollment Agent
+F[Apply school rules and conflict validations]
+G[Enrollment is created]
+H[Enrollment is blocked]
+I[Optional: Store billing information]
+J[Optional: Send email notifications]
+K[Other optional steps]
+end
+
+subgraph Beyond Class Rostering System
+L[Rostering]
+Z[Additional data]
+end
+
+subgraph Teacher
+M[Get rostering]
+end
+
+subgraph School Staff
+N[Get reports]
+O[Analytic dashboards]
+end
+
+%% ============================
+%% Flow (vertical)
+%% ============================
+
+A --> B --> C --> D --> E --> F
+F -->|Rules allow| G
+F -->|Rules prevent| H
+F --> I
+F --> J
+F --> K
+G --> L
+L --> M
+L --> N
+Z --> N
+L --> O
+Z --> O
+
 
 ```
+
 
 
 flowchart TD
