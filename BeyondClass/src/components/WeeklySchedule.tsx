@@ -1,17 +1,17 @@
 import React from "react";
 import { Box, Flex, Text } from "@radix-ui/themes";
 import type { SessionItem } from "../models/schedule";
-
+import { useTranslation } from "react-i18next";
 
 interface WeeklyScheduleProps {
   activities: SessionItem[];
 }
 
-
 export const WeeklySchedule: React.FC<WeeklyScheduleProps> = ({ activities }) => {
-  // Group activities by weekday
+  const { t } = useTranslation();
 
-  const WEEKDAYS = activities.map(a => a.weekday)
+  // Group activities by weekday
+  const WEEKDAYS = activities.map(a => a.weekday);
   const grouped = WEEKDAYS.map(day => ({
     day,
     items: activities.filter(a => a.weekday === day)
@@ -35,10 +35,18 @@ export const WeeklySchedule: React.FC<WeeklyScheduleProps> = ({ activities }) =>
           borderBottom: "1px solid var(--gray-6)"
         }}
       >
-        <Text weight="bold" style={{ margin: "6px" }} size="2">Current Schedule</Text>
+        <Text weight="bold" style={{ margin: "6px" }} size="2">
+          {t("schedule.currentSchedule")}
+        </Text>
       </Flex>
 
       {/* Days */}
+
+      {grouped.length === 0 && (
+              <Text size="1" color="gray">
+                {t("schedule.noActivities")}
+              </Text>
+            )}
       {grouped.map(({ day, items }) => (
         <Box key={day}>
           <Flex
@@ -48,14 +56,11 @@ export const WeeklySchedule: React.FC<WeeklyScheduleProps> = ({ activities }) =>
               borderBottom: "1px solid var(--gray-6)"
             }}
           >
-            
-            {items.length !== 0 && (
-              <Text weight="bold" size="1" style={{ marginBottom: "6px" }}>
-              {day}
-              </Text>
-              ) }
-              {items.length !== 0 && (
-              
+            <Text weight="bold" size="1" style={{ marginBottom: "6px" }}>
+              {t(`weekdays.${day.toLowerCase()}`)}
+            </Text>
+
+            {items.length > 0 &&
               items.map(item => (
                 <Flex
                   key={item.id}
@@ -65,11 +70,10 @@ export const WeeklySchedule: React.FC<WeeklyScheduleProps> = ({ activities }) =>
                 >
                   <Text size="1">{item.displayname}</Text>
                   <Text size="1" color="gray">
-                    {item.starttime} to {item.endtime}
+                    {item.starttime} {t("schedule.to")} {item.endtime}
                   </Text>
                 </Flex>
-              ))
-            )}
+              ))}
           </Flex>
         </Box>
       ))}

@@ -30,5 +30,20 @@
     "enrollConfirmTitle":"Enrolling {{studentName}} in {{activityName}}",
     "acceptcost": "By accepting this enrollment, I agree to be charged ${{registrationCost}} for registration",
     "acceptoptionals": "and ${{optionalCost}} for optional items"
+  },
+  "schedule": {
+    "currentSchedule": "Current Schedule",
+    "to": "to",
+    "noActivities": "No activities scheduled"
+  },
+  "weekdays": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
   }
+
 }

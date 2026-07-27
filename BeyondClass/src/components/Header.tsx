@@ -1,5 +1,6 @@
 import { Flex, Box, Button, Card } from "@radix-ui/themes";
 import LanguageSelector from "./LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 import type { User } from "firebase/auth";
 
@@ -9,6 +10,7 @@ export interface HeaderProps {
 }
 
 export default function Header({ user, logoutRedirect }: HeaderProps) {
+  const { t } = useTranslation();
 
   return (
     <Card
@@ -34,7 +36,7 @@ export default function Header({ user, logoutRedirect }: HeaderProps) {
         <Box>
           {user && (
             <Button color="gray" variant="soft" onClick={logoutRedirect}>
-              Logout
+              {t("logout")}
             </Button>
           )}
         </Box>

@@ -5,19 +5,44 @@
   "staff": "Mitarbeiter",
   "parentPage": "Elternseite",
   "teacherPage": "Lehrkräfteseite",
-  "adminPage": "Verwaltungsseite",
+  "adminPage": "Administrationsseite",
   "loginGoogle": "Mit Google anmelden",
   "loginMicrosoft": "Mit Microsoft anmelden",
   "logout": "Abmelden",
+  "common": {
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen"
+  },
   "activities": {
     "header": "Aktivitäten entdecken",
-    "studentLabel": "Schüler",
-    "studentPlaceholder": "Wähle einen Schüler aus",
+    "studentLabel": "Schüler/Schülerin",
+    "studentPlaceholder": "Wähle einen Schüler oder eine Schülerin",
     "filterLabel": "Aktivitäten filtern nach",
-    "filterPlaceholder": "Gib Stichwörter ein, um Aktivitäten zu filtern...",
+    "filterPlaceholder": "Z.B. Sport, Kunst, MINT usw.",
     "loading": "Wird geladen…",
     "search": "Suchen",
-    "level": "Level",
-    "enroll": "Anmelden"
+    "OfferedTo": "Angeboten für Klassenstufen",
+    "level": "Klassenstufe",
+    "enroll": "Anmelden",
+    "wrongLanguage": "Die Sprache wurde geändert. Führe die Suche erneut aus, um die Übersetzung zu aktualisieren.",
+    "cost": "Kosten",
+    "optionals": "Optional",
+    "enrollConfirmTitle": "{{studentName}} für {{activityName}} anmelden",
+    "acceptcost": "Mit der Anmeldung stimme ich zu, {{registrationCost}} $ für die Registrierung zu bezahlen",
+    "acceptoptionals": "und {{optionalCost}} $ für optionale Artikel"
+  },
+  "schedule": {
+    "currentSchedule": "Aktueller Stundenplan",
+    "to": "bis",
+    "noActivities": "Keine Aktivitäten geplant"
+  },
+  "weekdays": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
   }
 }

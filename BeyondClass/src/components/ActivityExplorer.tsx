@@ -147,15 +147,7 @@ export default function ActivityExplorer ( { students,   fetchActivities , enrol
   </Box>
 
   {/* Right side: WeeklySchedule */}
-  <Box
-    style={{
-      flexBasis: "50%",
-      flexGrow: 1,
-      minWidth: "0", // prevents overflow
-    }}
-  >
     <WeeklySchedule activities={StSchedule} />
-  </Box>
 </Flex>
 
       </Card>

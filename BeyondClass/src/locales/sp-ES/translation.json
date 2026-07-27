@@ -3,21 +3,46 @@
   "parents": "Padres",
   "teachers": "Profesores",
   "staff": "Personal",
-  "parentPage": "Página de Padres",
-  "teacherPage": "Página de Profesores",
+  "parentPage": "Página para Padres",
+  "teacherPage": "Página para Profesores",
   "adminPage": "Página de Administración",
   "loginGoogle": "Iniciar sesión con Google",
   "loginMicrosoft": "Iniciar sesión con Microsoft",
   "logout": "Cerrar sesión",
+  "common": {
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
+  },
   "activities": {
     "header": "Explorar Actividades",
     "studentLabel": "Estudiante",
     "studentPlaceholder": "Selecciona un estudiante",
     "filterLabel": "Filtrar actividades por",
-    "filterPlaceholder": "Escribe palabras clave para filtrar actividades...",
+    "filterPlaceholder": "Ej. deportes, arte, STEM, etc.",
     "loading": "Cargando…",
     "search": "Buscar",
-    "level": "Nivel",
-    "enroll": "Inscribirse"
+    "OfferedTo": "Ofrecido a los grados",
+    "level": "grado",
+    "enroll": "Inscribirse",
+    "wrongLanguage": "El idioma ha cambiado. Ejecuta la búsqueda nuevamente para actualizar la traducción.",
+    "cost": "Costo",
+    "optionals": "Opcionales",
+    "enrollConfirmTitle": "Inscribiendo a {{studentName}} en {{activityName}}",
+    "acceptcost": "Al aceptar esta inscripción, acepto que se me cobre ${{registrationCost}} por el registro",
+    "acceptoptionals": "y ${{optionalCost}} por los artículos opcionales"
+  },
+  "schedule": {
+    "currentSchedule": "Horario Actual",
+    "to": "a",
+    "noActivities": "No hay actividades programadas"
+  },
+  "weekdays": {
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo"
   }
 }

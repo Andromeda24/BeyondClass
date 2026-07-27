@@ -1,23 +1,48 @@
 {
-  "appSlogan": "All the activities in one place, with the power of AI",
+  "appSlogan": "All the activities in one place, powered by AI",
   "parents": "Parents",
   "teachers": "Teachers",
   "staff": "Staff",
-  "parentPage": "Parents’ Page",
-  "teacherPage": "Teachers’ Page",
+  "parentPage": "Parents' Page",
+  "teacherPage": "Teachers' Page",
   "adminPage": "Administration Page",
   "loginGoogle": "Sign in with Google",
   "loginMicrosoft": "Sign in with Microsoft",
   "logout": "Sign out",
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
   "activities": {
     "header": "Explore Activities",
     "studentLabel": "Student",
     "studentPlaceholder": "Select a student",
     "filterLabel": "Filter activities by",
-    "filterPlaceholder": "Type keywords to filter activities...",
+    "filterPlaceholder": "E.g. sports, art, STEM, etc.",
     "loading": "Loading…",
     "search": "Search",
-    "level": "Level",
-    "enroll": "Enrol"
+    "OfferedTo": "Offered to years",
+    "level": "year",
+    "enroll": "Enrol",
+    "wrongLanguage": "The language has changed. Run the search again to update the translation.",
+    "cost": "Cost",
+    "optionals": "Optional",
+    "enrollConfirmTitle": "Enrolling {{studentName}} in {{activityName}}",
+    "acceptcost": "By accepting this enrolment, I agree to be charged £{{registrationCost}} for registration",
+    "acceptoptionals": "and £{{optionalCost}} for optional items"
+  },
+  "schedule": {
+    "currentSchedule": "Current Schedule",
+    "to": "to",
+    "noActivities": "No activities scheduled"
+  },
+  "weekdays": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
   }
 }
