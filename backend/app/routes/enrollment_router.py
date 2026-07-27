@@ -1,6 +1,7 @@
 
 from app.model.enrollment import CostItem,EnrollmentInput,Student
-from app.services.enrollService import insert_enrollment, readRoster
+from app.services.rostering.enrollmentService import  readRoster
+from app.services.rostering.registerEnrollment import enrollmentAgent
 from fastapi import APIRouter
 
 
@@ -16,5 +17,5 @@ async def getRoster(activityId: str):
 @router.post("/{activityId}")
 async def enroll_student( activityId: str, body: EnrollmentInput):
     print (f"enroll in {activityId}" )
-    return await insert_enrollment(activityId, body)
+    return await enrollmentAgent(activityId, body)
 

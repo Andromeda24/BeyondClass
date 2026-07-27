@@ -1,5 +1,6 @@
 import "@radix-ui/themes/styles.css";
 import type {Activity, Student} from "../models/activity";
+
 import { EnrollPopup } from "./EnrollPopup";
 import { WeeklySchedule } from "./WeeklySchedule";
 
@@ -16,34 +17,26 @@ import {
 } from "@radix-ui/themes";
 
 import { useTranslation } from "react-i18next";
+import type { SessionItem } from "../models/schedule";
 
-
-
-
-export async function enrollService(activityId: string): Promise<{ success: boolean }> {
-  console.log("Enroll service called with activityId:", activityId);
-
-  // Simulate a network delay
-  await new Promise((resolve) => setTimeout(resolve, 800));
-
-  // Fake response
-  return { success: true };
-}
-
-export default function ActivityExplorer ( { students,   fetchActivities })
+export default function ActivityExplorer ( { students,   fetchActivities , enrollservice, fetchSchedule})
  {
   const { i18n } = useTranslation();
   const { t } = useTranslation();
 
   const [selectedStudent, setSelectedStudent] = useState(students[0]?.id ?? "");
+  const [StSchedule, setStSchedule] = useState<SessionItem[]>([]);
   const [filter, setFilter] = useState("");
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   
-  const handleStudentChange = (value: string) => {
+  const handleStudentChange = async (value: string) => {
     setSelectedStudent(value);
-   // setActivities([]); // clear activities when student changes
+    setActivities([]); // clear activities when student changes
+    setFilter("");
+   const currentSchedule = await fetchSchedule(value);
+   setStSchedule(currentSchedule);
   }; 
 
   function getCurrentStudent(
@@ -96,46 +89,75 @@ export default function ActivityExplorer ( { students,   fetchActivities })
           width: "100%"
         }}
       >
-        <form onSubmit={handleSubmit}>
-          <Flex direction="column" gap="4">
-            {/* Student Select */}
-            <Flex direction="column" gap="1">
-              <Text size="2">{t("activities.studentLabel")}</Text>
+<Flex
+  direction={{ initial: "column", sm: "row" }}
+  gap="4"
+  style={{
+    width: "100%",
+  }}
+>
+  {/* Left side: Form */}
+  <Box
+    style={{
+      flexBasis: "50%",
+      flexGrow: 1,
+      minWidth: "0", // prevents horizontal overflow
+    }}
+  >
+    <form onSubmit={handleSubmit}>
+      <Flex direction="column" gap="4">
+        {/* Student Select */}
+        <Flex direction="column" gap="1">
+          <Text size="2">{t("activities.studentLabel")}</Text>
 
-              <Select.Root
-                value={selectedStudent}
-                onValueChange={handleStudentChange}
-                required
-              >
-                <Select.Trigger/>
-                <Select.Content>
-                  {students.map((s: Student) => (
-                    <Select.Item key={s.id} value={s.id}>
-                      {s.displayName}  ({t("activities.level")} {s.level})
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
-            </Flex>
+          <Select.Root
+            value={selectedStudent}
+            onValueChange={handleStudentChange}
+            required
+          >
+            <Select.Trigger />
+            <Select.Content>
+              {students.map((s: Student) => (
+                <Select.Item key={s.id} value={s.id}>
+                  {s.displayName} ({t("activities.level")} {s.level})
+                </Select.Item>
+              ))}
+            </Select.Content>
+          </Select.Root>
+        </Flex>
 
-            {/* Filter Input */}
-            <Flex direction="column" gap="1">
-              <Text size="2">{t("activities.filterLabel")}</Text>
+        {/* Filter Input */}
+        <Flex direction="column" gap="1">
+          <Text size="2">{t("activities.filterLabel")}</Text>
 
-              <Box>
-                <TextField.Root
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                  placeholder={t("activities.filterPlaceholder")}
-                />
-              </Box>
-            </Flex>
+          <Box>
+            <TextField.Root
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder={t("activities.filterPlaceholder")}
+            />
+          </Box>
+        </Flex>
 
-            <Button type="submit" disabled={loading}>
-              {loading ? t("activities.loading") : t("activities.search")}
-            </Button>
-          </Flex>
-        </form>
+        <Button type="submit" disabled={loading}>
+          {loading ? t("activities.loading") : t("activities.search")}
+        </Button>
+      </Flex>
+    </form>
+  </Box>
+
+  {/* Right side: WeeklySchedule */}
+  <Box
+    style={{
+      flexBasis: "50%",
+      flexGrow: 1,
+      minWidth: "0", // prevents overflow
+    }}
+  >
+    <WeeklySchedule activities={StSchedule} />
+  </Box>
+</Flex>
+
       </Card>
 
       {/* RESULTS GRID */}
@@ -199,12 +221,14 @@ export default function ActivityExplorer ( { students,   fetchActivities })
                   </Text>
       
 
-                  <EnrollPopup activity={activity} student= {getCurrentStudent(students,selectedStudent)} onConfirm={enrollService} t={t} />
+                  <EnrollPopup activity={activity} student= {getCurrentStudent(students,selectedStudent)} onConfirm={enrollservice} t={t} />
             </Flex>
           </Card>
         ))}
       </Flex>
-      <WeeklySchedule activities={activities} />
+      
     </Flex>
+
+    
   );
 };

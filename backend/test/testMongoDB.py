@@ -1,4 +1,4 @@
-from app.services.enrollService import init_db
+from app.services.rostering.enrollmentService import init_db
 from app.model.enrollment import Enrollment, CostItem
 
 

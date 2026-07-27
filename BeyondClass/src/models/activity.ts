@@ -5,7 +5,7 @@ export interface CostItem {
   value: number;
 }
 
-export interface Activity {
+export type Activity = {
     id: string;
     name: string;
     description: string;
@@ -19,30 +19,12 @@ export interface Activity {
     match: string;
 
   }
-
-  export interface EnrollActivity {
-    id: string;
-    name: string;
-    description: string;
-    weekday: string;
-    time: string;
-    levels:string;
-    cost:number;
-    txtoptionalcosts:string;
-    optionals:[CostItem];
-    imageUrl:string;
-    match: string;
-
-  }
-
 
   export type Student = {
     id: string;
     displayName: string;
     fullName: string;
     level: number;
-    parentId: string;
+    parent: string;
   };
 
-  
-  

@@ -1,5 +1,5 @@
-from ..config import settings
-from ..model.activities import ActivitiesResponse, modeldescription
+from app.config import settings
+from app.model.activities import ActivitiesResponse, modeldescription
 from agents import Agent, Runner, FileSearchTool, SQLiteSession
 import json
 

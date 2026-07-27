@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import Optional
 
-from ..services.translatedCatalog import gettranslatedActivitiesCatalog
+from app.services.translator.translatedCatalog import gettranslatedActivitiesCatalog
 ##from ..services.activity_catalog import getActivitiesCatalog
 from ..config import settings
 
@@ -35,7 +35,6 @@ async def get_filtered_activities(
 
     try:
         return await gettranslatedActivitiesCatalog (level, filter,lang)
-        #return await getActivitiesCatalog(level, filter)
     except Exception as e:
         print("❌ Error in get_filtered_activities:", str(e))
 

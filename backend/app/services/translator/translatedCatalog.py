@@ -1,9 +1,9 @@
-from ..config import settings
-from ..model.activities import ActivitiesResponse, ActivitiesTranslation
+from app.config import settings
+from app.model.activities import ActivitiesResponse, ActivitiesTranslation
 from agents import Agent, Runner
 import json
-from app.services.translator import translatorAgent
-from app.services.activity_catalog import ActivityAgent
+from app.services.translator.translator import translatorAgent
+from app.services.catalog.catalogAgent import ActivityAgent
 
 defaultLanguage = settings.DEFAULT_LANGUAGE
 # Create the agent

@@ -5,9 +5,12 @@ import { subscribeToAuth } from "../auth/auth";
 import type { User } from "firebase/auth";
 //import {fetchActivities} from "../services/MockActivityService"
 import { fetchActivities } from "../services/ActivityService";
+import { enrollActivity } from "../services/EnrollmentService";
 import {students} from "../services/MockUserService"
 import { useNavigate } from "react-router-dom";
 import { logout } from "../auth/auth";
+import { fetchSchedule } from "../services/StudentServices";
+
 
 export const ParentPage = () => {
 
@@ -25,10 +28,13 @@ export const ParentPage = () => {
 
   return (
     <div>
+
       <Header user={user} logoutRedirect={logoutRedirect} />
       <ActivityExplorer
         students={students}
         fetchActivities={fetchActivities}
+        enrollservice={enrollActivity}
+        fetchSchedule={fetchSchedule}
     />
     </div>
     

@@ -12,18 +12,14 @@ from typing import List
 
 
 
-async def insert_enrollment(activityId: str, body: EnrollmentInput):
+async def insert_enrollment(activity: BasicActivity, body: EnrollmentInput):
     """
     Creates and inserts an Enrollment document based on EnrollmentInput.
     """
     try:
-        # Build BasicActivity from input
-        activity = BasicActivity(
-            id=activityId,
-            name=body.activityName,
-            weekday=body.weekday,
-            time=body.time
-        )
+
+        print(activity)
+        print(body)
 
         # Build Student from input
         student = body.student
@@ -32,15 +28,14 @@ async def insert_enrollment(activityId: str, body: EnrollmentInput):
         enrollment = Enrollment(
             activity=activity,
             student=student,
-            costs=body.cost,
+            costs=[],
             status="active",
             created_at=datetime.now(timezone.utc)
         )
 
         # Insert into MongoDB
         await enrollment.insert()
-        return enrollment
-
+        return []
     except Exception as e:
         raise Exception(f"Error inserting enrollment: {e}")
 

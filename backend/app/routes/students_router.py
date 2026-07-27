@@ -1,5 +1,5 @@
 
-from app.services.studentServices import readSchedule
+from app.services.schedule.studentServices import readSchedule
 from fastapi import APIRouter
 
 

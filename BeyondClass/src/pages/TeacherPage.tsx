@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { subscribeToAuth } from "../auth/auth";
 import type { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import RosteringModule from "../components/RosteringModule";
 import { logout } from "../auth/auth";
 
 export default function ParentPage() {
@@ -20,7 +21,10 @@ export default function ParentPage() {
   return (
     <div>
       <Header user={user} logoutRedirect={logoutRedirect} />
-      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Teacher's Page</h1>
-    </div>
+      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Activity Rostering</h1>
+      <RosteringModule/>
+  </div>
+  
+
   );
 }

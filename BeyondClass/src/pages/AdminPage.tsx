@@ -19,7 +19,7 @@ export default function AdminPage() {
   return (
     <div>
       <Header user={user} logoutRedirect={logoutRedirect} />
-      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Admin Page</h1>
+      <h1 style={{ textAlign: "center", marginTop: "40px" }}>Extracurricular Program Analytics</h1>
     </div>
   );
 }

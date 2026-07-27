@@ -4,9 +4,10 @@ from typing import List
 
 
 class Student(BaseModel):
-    studentId: str
+    id: str
     displayName: str
     fullName:str
     level:int
     parent:str
 
+ 

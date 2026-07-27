@@ -9,14 +9,13 @@ from datetime import datetime, timezone
 
 
 class EnrollmentInput(BaseModel):
-    activityName: str
     student: Student
-    weekday: str
-    time: str
-    cost: List[CostItem]
+    optionals: List[CostItem]
 
-class TestDoc (Document):
-    name:str
+class EnrollmentOutput(BaseModel):
+    ok: bool
+    okmsg: str
+    errormsg: str
 
 class Enrollment(Document):
     activity: BasicActivity
